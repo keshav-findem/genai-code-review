@@ -28,7 +28,7 @@ inputs:
     description: "The temperature for OpenAI responses. Controls the creativity of the responses. Higher values (e.g., 0.9) make output more random, while lower values (e.g., 0.1) make it more focused and deterministic."
     required: false
     default: "0.5"
-  openai_max_tokens:
+  openai_max_completion_tokens:
     description: "The maximum number of tokens to generate in the OpenAI response. Example: 1000"
     required: false
     default: "2048"
@@ -61,7 +61,7 @@ runs:
     GITHUB_PR_ID: ${{ inputs.github_pr_id }}
     OPENAI_MODEL: ${{ inputs.openai_model }}
     OPENAI_TEMPERATURE: ${{ inputs.openai_temperature }}
-    OPENAI_MAX_TOKENS: ${{ inputs.openai_max_tokens }}
+    OPENAI_max_completion_tokens: ${{ inputs.openai_max_completion_tokens }}
     MODE: ${{ inputs.mode }}
     LANGUAGE: ${{ inputs.language }}
     CUSTOM_PROMPT: ${{ inputs.custom_prompt }}
