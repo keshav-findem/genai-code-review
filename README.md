@@ -8,7 +8,7 @@
   - [1.2. Configuration Parameters](#12-configuration-parameters)
   - [1.3. `openai_engine`](#13-openai_engine)
     - [1.3.1. `openai_temperature`](#131-openai_temperature)
-    - [1.3.2. `openai_max_tokens`](#132-openai_max_tokens)
+    - [1.3.2. `openai_max_completion_tokens`](#132-openai_max_completion_tokens)
     - [1.3.3. `mode`](#133-mode)
     - [1.3.4. `language`](#134-language)
     - [1.3.5. `custom_prompt`](#135-custom_prompt)
@@ -90,7 +90,7 @@ jobs:
           github_pr_id: ${{ github.event.number }}
           openai_model: "gpt-4o" # optional
           openai_temperature: 0.5 # optional
-          openai_max_tokens: 2048 # optional
+          openai_max_completion_tokens: 2048 # optional
           mode: files # files or patch
           language: en # optional, default is 'en'
           custom_prompt: "" # optional
@@ -103,7 +103,7 @@ runner and uses the `dlidstrom/chatgpt-github-actions@v3` action.
 The `OPENAI_API_KEY` is passed from the secrets context, and the `GITHUB_TOKEN` is
 also passed from the secrets context. The `github_pr_id` is passed from the
 `github.event.number` context. The other three input parameters, `openai_engine`,
-`openai_temperature`, and `openai_max_tokens`, are optional and have default values.
+`openai_temperature`, and `openai_max_completion_tokens`, are optional and have default values.
 
 Note also that you need to allow the workflow permission to comment the PR (`issues`).
 This is done using these lines:
@@ -131,7 +131,7 @@ See [the documentation](https://docs.github.com/en/actions/writing-workflows/cho
 - **Default**: `0.5`
 - **Range**: `0.0` to `1.0`
 
-#### 1.3.2. `openai_max_tokens`
+#### 1.3.2. `openai_max_completion_tokens`
 
 - **Description**: The maximum number of tokens to generate in the completion.
 - **Default**: `2048`

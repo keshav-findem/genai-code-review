@@ -8,12 +8,12 @@ class TestOpenAIClient(unittest.TestCase):
     def setUp(self, MockOpenAI):
         self.mock_openai = MockOpenAI.return_value
         self.mock_openai.chat.completions.create.return_value = MagicMock(choices=[MagicMock(message=MagicMock(content="Test response"))])
-        self.client = OpenAIClient(model="gpt-3.5-turbo", temperature=0.7, max_tokens=150)
+        self.client = OpenAIClient(model="gpt-3.5-turbo", temperature=0.7, max_completion_tokens=150)
 
     def test_initialization(self):
         self.assertEqual(self.client.model, "gpt-3.5-turbo")
         self.assertEqual(self.client.temperature, 0.7)
-        self.assertEqual(self.client.max_tokens, 150)
+        self.assertEqual(self.client.max_completion_tokens, 150)
         
     def test_generate_response_success(self):
         prompt = "Hello, how are you?"
@@ -26,7 +26,7 @@ class TestOpenAIClient(unittest.TestCase):
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
-            max_tokens=150
+            max_completion_tokens=150
         )
 
     @patch('clients.openai_client.logging')
