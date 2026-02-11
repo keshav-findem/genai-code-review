@@ -61,7 +61,7 @@ runs:
     GITHUB_PR_ID: ${{ inputs.github_pr_id }}
     OPENAI_MODEL: ${{ inputs.openai_model }}
     OPENAI_TEMPERATURE: ${{ inputs.openai_temperature }}
-    OPENAI_max_completion_tokens: ${{ inputs.openai_max_completion_tokens }}
+    OPENAI_MAX_COMPLETION_TOKENS: ${{ inputs.openai_max_completion_tokens }}
     MODE: ${{ inputs.mode }}
     LANGUAGE: ${{ inputs.language }}
     CUSTOM_PROMPT: ${{ inputs.custom_prompt }}
