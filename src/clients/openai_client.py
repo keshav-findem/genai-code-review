@@ -65,7 +65,32 @@ class OpenAIClient:
                 max_completion_tokens=self.max_completion_tokens
             )
             logging.info("Response generated successfully.")
-            return response.choices[0].message.content
+            
+            # Debug logging for response structure
+            if response.choices:
+                choice = response.choices[0]
+                logging.info("Response choice finish_reason: %s", choice.finish_reason)
+                if hasattr(choice.message, 'content'):
+                    content = choice.message.content
+                    logging.info("Message content type: %s", type(content))
+                    logging.info("Message content is None: %s", content is None)
+                    if content:
+                        logging.info("Response content length: %d characters", len(content))
+                    else:
+                        logging.warning("OpenAI message.content is None or empty")
+                        # Check for refusal or other fields
+                        if hasattr(choice.message, 'refusal') and choice.message.refusal:
+                            logging.error("OpenAI refused the request: %s", choice.message.refusal)
+                            return f"OpenAI refused the request: {choice.message.refusal}"
+                        logging.warning("Full message object: %s", choice.message)
+                        return "No review generated. The model returned an empty response."
+                    return content
+                else:
+                    logging.error("Response message has no content attribute")
+                    return "Error: Unexpected response format from OpenAI"
+            else:
+                logging.error("Response has no choices")
+                return "Error: No response choices returned from OpenAI"
         except Exception as e:
             logging.error("Error generating response from OpenAI model: %s", e)
             raise
